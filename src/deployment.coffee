@@ -149,7 +149,7 @@ class Deployment
           message = bodyMessage
 
       if success and not message
-        message = "Deployment of #{name}/#{ref} to #{env} created"
+        message = "Deployment of #{name}/#{ref} to #{env} created (ID: #{deployment.id})"
 
       cb message
 
