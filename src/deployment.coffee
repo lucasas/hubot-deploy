@@ -80,6 +80,17 @@ class Deployment
     api.requestDefaults.headers['Accept'] = 'application/vnd.github.cannonball-preview+json'
     api
 
+  show: (id, cb) ->
+    path       = @apiConfig().path("repos/#{@repository}/deployments/#{id}/statuses")
+    params     =
+      environment: @env
+
+    @api().get path, params, (err, status, body, headers) ->
+      if err
+        body = err
+
+      cb(body[0])
+
   latest: (cb) ->
     path       = @apiConfig().path("repos/#{@repository}/deployments")
     params     =

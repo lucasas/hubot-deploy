@@ -22,6 +22,21 @@ DeploysPattern = Patterns.DeploysPattern
 ###########################################################################
 module.exports = (robot) ->
   ###########################################################################
+  # deploy-status <app> <id>
+  #
+  # Displays the state of a given deploy
+  robot.respond /deploy-status (.+) (.+)/i, (msg) ->
+    name = msg.match[1]
+    id = msg.match[2]
+
+    try
+      deployment = new Deployment(name)
+      deployment.show id, (deployment) ->
+        msg.send "Deploy (#{id}) of #{name} was #{deployment.state}"
+    catch err
+      msg.send "Deu ruim :disappointed_eduhot: #{err}"
+  
+  ###########################################################################
   # where can i deploy <app>
   #
   # Displays the available environments for an application
