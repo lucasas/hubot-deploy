@@ -32,7 +32,7 @@ module.exports = (robot) ->
     try
       deployment = new Deployment(name)
       deployment.show id, (deployment) ->
-        msg.send "Deploy (#{id}) of #{name} was #{deployment.state}"
+        msg.send "Deploy (#{id}) of #{name}: #{deployment.description}"
     catch err
       msg.send "Deu ruim :disappointed_eduhot: #{err}"
   
